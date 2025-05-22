@@ -16,3 +16,11 @@ Base = declarative_base()
 def create_db_and_tables():
     from app.models.user import User
     Base.metadata.create_all(bind=engine)
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

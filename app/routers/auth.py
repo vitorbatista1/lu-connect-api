@@ -5,6 +5,7 @@ from app.crud.user import create_user, get_user_by_email
 from app.core.security import verify_password, create_access_token, create_refresh_token
 from app.db.database import SessionLocal
 from app.core.security import *
+
 router = APIRouter()
 
 def get_db():
@@ -18,7 +19,7 @@ def get_db():
 def register(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = get_user_by_email(db, user.email)
     if existing_user:
-        raise HTTPException(status_code=400, detail="Email já registrado")
+        raise HTTPException(status_code=400, detail="Usuário já registrado")
     return create_user(db, user)
 
 @router.post("/login", response_model=Token)
