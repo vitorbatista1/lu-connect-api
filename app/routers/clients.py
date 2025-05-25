@@ -22,7 +22,6 @@ def read_client(client_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=ClientOut)
 def create_new_client(client: ClientCreate, db: Session = Depends(get_db)):
-    # Aqui você pode validar se o email/cpf já existe para evitar duplicidade
     return create_client(db, client)
 
 @router.put("/{client_id}", response_model=ClientOut)
